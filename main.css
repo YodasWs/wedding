@@ -1,0 +1,38 @@
+:root {
+	font-family: "Trebuchet MS", "Open Sans", sans-serif;
+	font-size: 12pt;
+}
+* { box-sizing: border-box; }
+html,body { padding: 0; margin: 0; }
+a:link,a:visited {
+	text-decoration: none;
+	color: #0000ff;
+}
+a:link:hover,
+a:link:active,
+a:visited:hover,
+a:visited:active {
+	text-decoration: underline;
+}
+
+header {
+	text-align: center;
+}
+header > h1 {
+
+}
+header > nav {
+	margin-bottom: 1.5rem;
+}
+header > nav > a {
+	margin: 0 1rem;
+}
+body > img {
+	width: 100%;
+	border: 1px solid dimgrey;
+	min-height: 100px;
+}
+article {
+	margin: 1rem auto;
+	max-width: 800px;
+}
