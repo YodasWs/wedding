@@ -1,9 +1,12 @@
 $(document).ready(function(){
 	var posMenu = $('nav').offset().top,
 		padHeader = $('header').css('padding-bottom'),
-		frameHeight = 2 / 3
+		frameRatio = 2 / 3
 	$('div.img').each(function() {
-		$(this).css('height', $(this).children('img').height() * frameHeight + 'px')
+		var $img = $(this)
+		$img.children('img').on('load', function() {
+			$img.css('height', $(this).height() * frameRatio + 'px')
+		})
 	})
 	// Determine Nav Height
 	if (padHeader) {
@@ -37,8 +40,15 @@ $(document).ready(function(){
 				scrollBtm = $par.offset + $par.height - $('nav').outerHeight()
 			}
 			$img.css({
-				top: (scrollTop - e.posScroll) / scrollBtm * $img.height() * (1 - frameHeight) + 'px'
+				top: (scrollTop - e.posScroll) / scrollBtm * $img.height() * (1 - frameRatio) + 'px'
 			})
 		})
 	}).trigger('scroll')
+	$(window).on('resize.scroll', function(){
+		$(document).trigger('scroll')
+	}).on('resize.img', function() {
+		$('div.img').each(function() {
+			$(this).css('height', $(this).children('img').height() * frameRatio + 'px')
+		})
+	})
 })
