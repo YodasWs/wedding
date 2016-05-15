@@ -22,6 +22,7 @@ body {
 header {
 	text-align: center;
 	position: relative;
+	background: white;
 }
 header > h1 {
 }
@@ -58,6 +59,7 @@ header > nav.unstuck > h1 {
 	line-height: 2rem;
 	font-size: 1rem;
 	display: block;
+	z-index: 10;
 	left: 1rem;
 	margin: 0;
 	top: 0;
@@ -68,31 +70,31 @@ header > nav.stuck > h1 {
 header > nav > a {
 	margin: 0 1rem;
 }
-body > div.img {
-	background-image: attr(data-src);
-	background-size: cover;
+div.img {
+	position: relative;
+	overflow: hidden;
 	height: 500px;
+	z-index: -1;
 	width: 100%;
 }
-body > div.img[data-src="img/engagement.jpg"] {
-	background-image: url("img/engagement.jpg");
-}
-body > img {
-	min-height: 100px;
-	max-height: 300px;
+div.img > img {
+	position: relative;
 	width: 100%;
 }
 article {
 	margin: 1rem auto;
+}
+article > :not(div.img) {
 	max-width: 800px;
 }
 @media (max-width: 799px) {
-	article {
+	article > :not(div.img) {
 		padding: 0 5px;
 	}
 }
 @media (min-width: 810px) {
-	header > nav.stuck > h1 {
+	header > nav.stuck > h1,
+	header > nav.unstuck > h1 {
 		left: calc(50% - 400px);
 	}
 }
