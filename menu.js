@@ -1,12 +1,16 @@
 $(document).ready(function(){
 	var posMenu = $('nav').offset().top,
 		padHeader = $('header').css('padding-bottom'),
-		frameRatio = 2 / 3
+		frameRatio = 2 / 3,
+		resizeFrame = function() {
+			$(this).parent('div.img').css('height', $(this).height() * frameRatio + 'px')
+		}
+	// Set Good Frame Size on Img Load
 	$('div.img').each(function() {
 		var $img = $(this)
-		$img.children('img').on('load', function() {
-			$img.css('height', $(this).height() * frameRatio + 'px')
-		})
+		$img.children('img').each(function() {
+			if (this.complete) resizeFrame()
+		}).on('load', resizeFrame)
 	})
 	// Determine Nav Height
 	if (padHeader) {
@@ -44,11 +48,10 @@ $(document).ready(function(){
 			})
 		})
 	}).trigger('scroll')
+	// Recalculate on Window Resize
 	$(window).on('resize.scroll', function(){
 		$(document).trigger('scroll')
 	}).on('resize.img', function() {
-		$('div.img').each(function() {
-			$(this).css('height', $(this).children('img').height() * frameRatio + 'px')
-		})
+		$('div.img > img').each(resizeFrame)
 	})
 })

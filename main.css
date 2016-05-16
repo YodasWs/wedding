@@ -91,7 +91,7 @@ article > :not(div.img) {
 	max-width: 800px;
 }
 @media (max-width: 799px) {
-	article > :not(div.img) {
+	article > :not(div):not(.img) {
 		padding: 0 5px;
 	}
 }
