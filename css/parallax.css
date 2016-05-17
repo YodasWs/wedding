@@ -1,0 +1,11 @@
+div.img {
+	position: relative;
+	overflow: hidden;
+	height: 500px;
+	width: 100%;
+}
+div.img > img {
+	position: relative;
+	width: 100%;
+}
+

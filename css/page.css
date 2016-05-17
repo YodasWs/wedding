@@ -1,0 +1,48 @@
+:root {
+	font-family: "Trebuchet MS", "Open Sans", sans-serif;
+	font-size: 12pt;
+}
+* { box-sizing: border-box; }
+html,body { padding: 0; margin: 0; }
+a:link,a:visited {
+	text-decoration: none;
+	color: #0000ff;
+}
+a:link:hover,
+a:link:active,
+a:visited:hover,
+a:visited:active {
+	text-decoration: underline;
+}
+
+body {
+	min-height: 300vh;
+}
+
+header {
+	text-align: center;
+	position: relative;
+	background: white;
+}
+header > h1 {
+}
+header > nav {
+	border-bottom: 1px solid transparent;
+	transition: border-bottom 500ms;
+	margin-bottom: 1rem;
+	padding: 0.5rem 0;
+}
+header > nav > h1 {
+	display: none;
+}
+article {
+	margin: 1rem auto;
+}
+article > :not(div.img) {
+	max-width: 800px;
+}
+@media (max-width: 799px) {
+	article > :not(div):not(.img) {
+		padding: 0 5px;
+	}
+}
