@@ -1,7 +1,13 @@
+window.width = function() {
+	var a = document.documentElement.clientWidth, b = window.innerWidth;
+	return a < b ? b : a;
+}
 $(document).ready(function(){
 	var frameRatio = 2 / 3,
 		resizeFrame = function() {
-			$(this).parent('figure.parallax').css('height', $(this).height() * frameRatio + 'px')
+			if (window.width() > 500) {
+				$(this).parent('figure').css('height', $(this).height() * frameRatio + 'px')
+			}
 		}
 	// Set Good Frame Size on Img Load
 	$('figure.parallax').each(function() {
@@ -35,13 +41,12 @@ $(document).ready(function(){
 	}).trigger('scroll.parallax')
 	// Recalculate on Window Resize
 	$(window).on('resize.parallax', function() {
-console.log($(window).width())
-		if ($(window).width() < 400) {
-			$('figure.parallax').removeClass('parallax').addClass('noparallax').css('height', '')
-				.children('img').css('top', '')
+		$('figure.parallax, figure.noparallax').css('height', '').children('img').each(resizeFrame).css('top', '')
+		if (window.width() < 500) {
+			$('figure.parallax').removeClass('parallax').addClass('noparallax')
 		} else {
 			$('figure.noparallax').removeClass('noparallax').addClass('parallax')
-				.children('img').each(resizeFrame)
 		}
+		$(document).trigger('scroll.parallax')
 	}).trigger('resize.parallax')
 })

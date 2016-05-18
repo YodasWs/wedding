@@ -4,7 +4,7 @@
 	justify-content: space-between;
 	overflow: hidden;
 }
-@media (min-width: 400px) {
+@media (min-width: 500px) {
 	.cardrack > figure {
 		max-width: calc(50% - 2.5px);
 	}
@@ -15,6 +15,10 @@
 	}
 }
 @media (min-width: 800px) {
+	.cardrack {
+		max-width: 800px;
+		margin: 0 auto;
+	}
 	.cardrack > figure {
 		max-width: calc(25% - 2.5px);
 	}

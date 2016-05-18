@@ -1,7 +1,7 @@
 figure {
 	z-index: -1;
 	border-radius: 50px;
-	background-color: fuchsia;
+	background-color: floralwhite;
 	max-width: 100%;
 	position: relative;
 	display: block;
@@ -37,7 +37,7 @@ figure > img:nth-child(n + 2) {
 	left: 1rem;
 	top: 1rem;
 }
-@media (min-width: 400px) {
+@media (min-width: 500px) {
 	figure {
 		border-radius: 0;
 		padding: 0;
