@@ -1,0 +1,47 @@
+.cardrack {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	overflow: hidden;
+}
+.cardrack > figure {
+	max-width: calc(50% - 2.5px);
+	position: relative;
+	display: block;
+	margin: 0;
+}
+.cardrack > figure > img {
+	backface-visibility: hidden;
+	transform: rotateY(-180deg);
+	transition: transform 2s;
+	visibility: hidden;
+	position: relative;
+	max-width: 100%;
+	z-index: -1;
+}
+.cardrack > figure:not(.activated) > img:first-child,
+.cardrack > figure.activated > img.active {
+	transform: rotateY(0deg);
+	visibility: visible;
+	z-index: 0;
+}
+.cardrack > figure.activated > img:first-child:not(.active),
+.cardrack > figure.activated > img.active + img {
+	transform: rotateY(180deg);
+	visibility: visible;
+}
+.cardrack > figure > img:nth-child(n + 2) {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+@media (min-width: 600px) {
+	.cardrack > figure {
+		max-width: calc(33.333% - 2.5px);
+	}
+}
+@media (min-width: 800px) {
+	.cardrack > figure {
+		max-width: calc(25% - 2.5px);
+	}
+}
