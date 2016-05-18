@@ -1,6 +1,5 @@
 window.width = function() {
-	var a = document.documentElement.clientWidth, b = window.innerWidth;
-	return a < b ? b : a;
+	return Math.max(document.documentElement.clientWidth, window.innerWidth);
 }
 $(document).ready(function(){
 	var frameRatio = 2 / 3,

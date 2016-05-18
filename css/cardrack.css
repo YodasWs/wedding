@@ -1,12 +1,14 @@
 .cardrack {
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: space-between;
+	justify-content: space-around;
+	align-items: flex-start;
 	overflow: hidden;
 }
 @media (min-width: 500px) {
 	.cardrack > figure {
 		max-width: calc(50% - 2.5px);
+		background: none;
 	}
 }
 @media (min-width: 600px) {
