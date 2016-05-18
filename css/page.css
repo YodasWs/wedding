@@ -16,13 +16,14 @@ a:visited:active {
 }
 
 body {
+	background-color: #ffe0ff;
 	min-height: 300vh;
 }
 
 header {
 	text-align: center;
 	position: relative;
-	background: white;
+	background-color: inherit;
 }
 header > h1 {
 }
@@ -38,13 +39,17 @@ header > nav > h1 {
 article {
 	margin: 1rem auto;
 }
-article > :not(.img) {
+article > * {
 	max-width: 800px;
 	margin: 0 auto;
 }
 @media (max-width: 799px) {
-	article > :not(.img) {
+	article > * {
 		padding: 0 5px;
+	}
+	article > figure.noparallax {
+		margin-right: 5px;
+		margin-left: 5px;
 	}
 }
 footer {

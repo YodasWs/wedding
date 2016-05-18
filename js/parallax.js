@@ -1,10 +1,10 @@
 $(document).ready(function(){
 	var frameRatio = 2 / 3,
 		resizeFrame = function() {
-			$(this).parent('figure.img').css('height', $(this).height() * frameRatio + 'px')
+			$(this).parent('figure.parallax').css('height', $(this).height() * frameRatio + 'px')
 		}
 	// Set Good Frame Size on Img Load
-	$('figure.img').each(function() {
+	$('figure.parallax').each(function() {
 		var $img = $(this)
 		$img.children('img').each(function() {
 			if (this.complete) resizeFrame.apply(this)
@@ -14,7 +14,7 @@ $(document).ready(function(){
 	$(document).on('scroll.parallax', function(e) {
 		e.posScroll = $(document).scrollTop()
 		var winHeight = $(window).height()
-		$('figure.img > img').each(function() {
+		$('figure.parallax > img').each(function() {
 			var $img = $(this),
 				$par = $img.parent(),
 				scrollTop, scrollBtm
@@ -34,7 +34,14 @@ $(document).ready(function(){
 		})
 	}).trigger('scroll.parallax')
 	// Recalculate on Window Resize
-	$(window).on('resize.img', function() {
-		$('figure.img > img').each(resizeFrame)
-	})
+	$(window).on('resize.parallax', function() {
+console.log($(window).width())
+		if ($(window).width() < 400) {
+			$('figure.parallax').removeClass('parallax').addClass('noparallax').css('height', '')
+				.children('img').css('top', '')
+		} else {
+			$('figure.noparallax').removeClass('noparallax').addClass('parallax')
+				.children('img').each(resizeFrame)
+		}
+	}).trigger('resize.parallax')
 })

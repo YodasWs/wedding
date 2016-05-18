@@ -13,7 +13,7 @@ header > nav.unstuck > h1 {
 }
 header > nav.stuck {
 	border-bottom: 1px solid black;
-	background: white;
+	background: inherit;
 	position: fixed;
 	right: 0;
 	left: 0;

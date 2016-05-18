@@ -1,0 +1,55 @@
+figure {
+	z-index: -1;
+	border-radius: 50px;
+	background-color: fuchsia;
+	max-width: 100%;
+	position: relative;
+	display: block;
+	padding: 1rem;
+	margin: 0 0 0.5rem;
+}
+figure > img {
+	border-radius: calc(50px - 1rem);
+	backface-visibility: hidden;
+	transform: rotateY(-180deg);
+	transition: transform 2s, max-width 500ms;
+	visibility: hidden;
+	position: relative;
+	max-width: 100%;
+	z-index: 0;
+}
+figure:not(.activated) > img:first-child,
+figure.activated > img.active {
+	transform: rotateY(0deg);
+	visibility: visible;
+	z-index: 1;
+}
+figure.activated > img:not(:first-child) {
+	max-width: calc(100% - 2rem);
+}
+figure.activated > img:first-child:not(.active),
+figure.activated > img.active + img {
+	transform: rotateY(180deg);
+	visibility: visible;
+}
+figure > img:nth-child(n + 2) {
+	position: absolute;
+	left: 1rem;
+	top: 1rem;
+}
+@media (min-width: 400px) {
+	figure {
+		border-radius: 0;
+		padding: 0;
+	}
+	figure > img {
+		border-radius: 0;
+	}
+	figure.activated > img:not(:first-child) {
+		max-width: 100%;
+	}
+	figure > img:nth-child(n + 2) {
+		left: 0;
+		top: 0;
+	}
+}
