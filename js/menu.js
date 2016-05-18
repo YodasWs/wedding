@@ -15,7 +15,7 @@ $(document).ready(function(){
 		} else if ($(document).scrollTop() < posMenu && $('nav.unstuck').length == 0) {
 			$('nav').addClass('unstuck').removeClass('stuck')
 		}
-	})
+	}).trigger('scroll.menu')
 	// Recalculate on Window Resize
 	$(window).on('resize.scroll', function(){
 		$(document).trigger('scroll')
