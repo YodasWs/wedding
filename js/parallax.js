@@ -22,17 +22,19 @@ $(document).ready(function(){
 		$('figure.parallax > img').each(function() {
 			var $img = $(this),
 				$par = $img.parent(),
-				scrollTop, scrollBtm
-			$par.offset = $par.offset().top
-			scrollTop = $par.offset - winHeight
-			$par.height = $par.height()
-			if (e.posScroll + winHeight < $par.offset) return
-			if (e.posScroll > $par.offset + $par.height) return
-			scrollBtm = winHeight + $par.height - $('nav').outerHeight()
+				scrollTop, scrollBtm,
+				scrollOffset = 2/3
+			scrollTop = $par.offset().top - winHeight * scrollOffset
+			if (e.posScroll + winHeight < $par.offset().top) return
+			if (e.posScroll > $par.offset().top + $par.height()) return
+			scrollBtm = winHeight
 			if (scrollTop < 0) {
 				scrollTop = 0
-				scrollBtm = $par.offset + $par.height - $('nav').outerHeight()
+				scrollBtm = $par.offset().top
 			}
+			scrollBtm += $par.height()
+			scrollBtm -= $('nav').outerHeight()
+			scrollBtm -= (1 - scrollOffset) * winHeight
 			$img.css({
 				top: (scrollTop - e.posScroll) / scrollBtm * $img.height() * (1 - frameRatio) + 'px'
 			})

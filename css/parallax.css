@@ -1,4 +1,3 @@
-article > figure.parallax,
 figure.parallax {
 	background: transparent;
 	position: relative;
@@ -8,11 +7,20 @@ figure.parallax {
 	height: 500px;
 	width: 100%;
 	padding: 0;
-	margin: 0;
+	margin: 0 auto;
 }
 figure.parallax > img {
 	position: relative;
 	border-radius: 0;
 	width: 100%;
 }
-
+@media (min-width: 500px) {
+	figure.parallax {
+		margin-bottom: 1rem;
+	}
+}
+@media (min-width: 1200px) {
+	figure.parallax {
+		max-width: 1200px;
+	}
+}
