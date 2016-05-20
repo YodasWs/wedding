@@ -37,19 +37,3 @@ figure > img:nth-child(n + 2) {
 	left: 1rem;
 	top: 1rem;
 }
-@media (min-width: 500px) {
-	figure {
-		border-radius: 0;
-		padding: 0;
-	}
-	figure > img {
-		border-radius: 0;
-	}
-	figure.activated > img:not(:first-child) {
-		max-width: 100%;
-	}
-	figure > img:nth-child(n + 2) {
-		left: 0;
-		top: 0;
-	}
-}

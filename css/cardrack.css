@@ -5,15 +5,17 @@
 	align-items: flex-start;
 	overflow: hidden;
 }
+.cardrack > figure {
+	overflow: hidden;
+}
 @media (min-width: 500px) {
 	.cardrack > figure {
-		max-width: calc(50% - 2.5px);
-		background: none;
+		max-width: calc(50% - 5px);
 	}
 }
 @media (min-width: 600px) {
 	.cardrack > figure {
-		max-width: calc(33.333% - 2.5px);
+		max-width: calc(33.333% - 5px);
 	}
 }
 @media (min-width: 800px) {
@@ -22,6 +24,11 @@
 		margin: 0 auto;
 	}
 	.cardrack > figure {
-		max-width: calc(25% - 2.5px);
+		max-width: calc(25% - 5px);
+	}
+}
+@media (min-width: 800px) and (min-resolution: 150dpi) {
+	.cardrack > figure {
+		max-width: calc(50% - 5px);
 	}
 }

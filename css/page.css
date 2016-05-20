@@ -59,11 +59,11 @@ section > h1 {
 }
 @media (max-width: 799px) {
 	section > * {
-		padding: 0 5px;
+		padding: 0 0.5rem;
 	}
 	section > figure.noparallax {
-		margin-right: 5px;
-		margin-left: 5px;
+		margin-right: 0.5rem;
+		margin-left: 0.5rem;
 	}
 }
 footer {
