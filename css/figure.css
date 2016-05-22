@@ -11,7 +11,7 @@ figure {
 	box-shadow: 0 0 0 1rem floralwhite;
 }
 figure > img {
-	border-radius: 50px;
+	border-radius: inherit;
 	backface-visibility: hidden;
 	transform: rotateY(-180deg);
 	transition: transform 2s, max-width 500ms;
@@ -38,4 +38,13 @@ figure > img:nth-child(n + 2) {
 	position: absolute;
 	left: 0;
 	top: 0;
+}
+
+figure.bottom {
+	height: 450px;
+	width: 100%;
+}
+figure.bottom > img {
+	position: absolute;
+	bottom: 0;
 }
