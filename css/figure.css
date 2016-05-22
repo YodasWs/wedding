@@ -4,12 +4,14 @@ figure {
 	background-color: floralwhite;
 	max-width: 100%;
 	position: relative;
+	overflow: hidden;
 	display: block;
-	padding: 1rem;
-	margin: 0 0 0.5rem;
+	padding: 0;
+	margin: 1rem 1rem 1.5rem;
+	box-shadow: 0 0 0 1rem floralwhite;
 }
 figure > img {
-	border-radius: calc(50px - 1rem);
+	border-radius: 50px;
 	backface-visibility: hidden;
 	transform: rotateY(-180deg);
 	transition: transform 2s, max-width 500ms;
@@ -25,7 +27,7 @@ figure.activated > img.active {
 	z-index: 1;
 }
 figure.activated > img:not(:first-child) {
-	max-width: calc(100% - 2rem);
+	max-width: 100%;
 }
 figure.activated > img:first-child:not(.active),
 figure.activated > img.active + img {
@@ -34,6 +36,6 @@ figure.activated > img.active + img {
 }
 figure > img:nth-child(n + 2) {
 	position: absolute;
-	left: 1rem;
-	top: 1rem;
+	left: 0;
+	top: 0;
 }

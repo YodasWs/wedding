@@ -61,10 +61,6 @@ section > h1 {
 	section > * {
 		padding: 0 0.5rem;
 	}
-	section > figure.noparallax {
-		margin-right: 0.5rem;
-		margin-left: 0.5rem;
-	}
 }
 footer {
 	margin: 1rem auto;
