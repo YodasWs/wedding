@@ -1,0 +1,323 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000" viewBox="0 0 1000 1000" xml:lang="zh">
+<style><![CDATA[
+:root {
+	font-family: 'Trebuchet MS', 'Open Sans', sans-serif;
+	font-size: 14pt;
+}
+path,
+circle {
+	fill: #ffe0ff;
+	stroke: black;
+	stroke-width: 1px;
+}
+path {
+	opacity: 1;
+}
+path.hide {
+	opacity: 0;
+}
+path.red {
+	stroke-linejoin: round;
+	stroke-linecap: round;
+	stroke-width: 2.5px;
+	stroke: red;
+	fill: none;
+}
+circle {
+}
+circle.red {
+	stroke: red;
+	fill: red;
+}
+circle.spiral {
+	stroke: black;
+	fill: none;
+}
+g > text:first-of-type {
+	font-size: 1.05rem;
+	text-decoration: underline;
+}
+g > text:not(:first-of-type) {
+	font-size: 0.9rem;
+	fill: #444444;
+}
+rect {
+	fill: none;
+	stroke: black;
+	stroke-width: 1px;
+}
+g > rect {
+	fill: honeydew;
+	stroke: green;
+	strong-width: 2px;
+}
+]]></style>
+<script><![CDATA[
+Number.isFinite=Number.isFinite||function(v){return typeof v==='number'&&isFinite(v)};
+Number.isInteger=Number.isInteger||function(v){return Number.isFinite(v)&&Math.floor(v)===v};
+String.prototype.trim=function(c){return this.replace(new RegExp('^['+(c||'\s\uFEFF\xA0')+']+|['+(c||'\s\uFEFF\xA0')+']+$','g'),'')};
+Element.prototype.prependChild=function(ele){if(this.childNodes.length)this.insertBefore(ele,this.childNodes[0]);else this.appendChild(ele)};
+SVGElement.prototype.addClass = function(newClass) {
+	var elClass = this.getAttribute('class');
+	if (!elClass) {
+		elClass = newClass;
+	} else {
+		elClass = elClass.split(/\s+/);
+		if (elClass.indexOf(newClass) == -1) {
+			elClass.push(newClass);
+		}
+		elClass = elClass.join(' ');
+	}
+	this.setAttribute('class', elClass);
+	return this;
+};
+SVGElement.prototype.removeClass = function(badClass) {
+	var elClass = this.getAttribute('class');
+	if (!elClass) {
+		return this;
+	}
+	elClass = elClass.split(/\s+/);
+	if (elClass.indexOf(badClass) > -1) {
+		elClass.splice(elClass.indexOf(badClass), 1);
+	}
+	elClass = elClass.join(' ');
+	this.setAttribute('class', elClass);
+};
+Math.deg2rad=function(deg){return Math.PI*deg/180}
+Math.rad2deg=function(rad){return 180*rad/Math.PI}
+var svg = {
+	circle: function(x, y, r) {
+		var c = document.createElementNS("http://www.w3.org/2000/svg", 'circle')
+		c.setAttribute("cx", x)
+		c.setAttribute("cy", y)
+		c.setAttribute("r", r)
+		return c
+	},
+	ele: function(ele) {
+		return document.createElementNS("http://www.w3.org/2000/svg", ele)
+	}
+},
+Flower = function() {
+	var radius = 10,
+		petalSize = {
+			x: 10,
+			y: 10
+		},
+		svgPath = svg.ele('path'),
+		center = {
+			x: 500,
+			y: 500
+		},
+		numPetals = 5;
+	Object.defineProperty(this, 'radius', {
+		enumerable: true,
+		get: function() { return radius },
+		set: function(r) {
+			if (Number.isFinite(r)) {
+				radius = r
+			}
+		}
+	});
+	Object.defineProperty(this, 'numPetals', {
+		enumerable: true,
+		get: function() { return numPetals },
+		set: function(n) {
+			if (Number.isInteger(n) && n > 0) {
+				numPetals = n
+			}
+		}
+	});
+	Object.defineProperty(this, 'petalLength', {
+		enumerable: true,
+		get: function() { return petalSize.x },
+		set: function(n) {
+			if (Number.isFinite(n) && n > 0) {
+				petalSize.x = n
+			}
+		}
+	});
+	Object.defineProperty(this, 'petalWidth', {
+		enumerable: true,
+		get: function() { return petalSize.y },
+		set: function(n) {
+			if (Number.isFinite(n) && n > 0) {
+				petalSize.y = n
+			}
+		}
+	});
+	Object.defineProperty(this, 'path', {
+		get: function() { return svgPath },
+		enumerable: true
+	});
+	Object.defineProperty(this, 'center', {
+		get: function() { return center },
+		enumerable: true
+	});
+	this.setCenter = function(x, y) {
+		if (Number.isFinite(x) && x > 0 && Number.isFinite(y) && y > 0) {
+			center.x = x
+			center.y = y
+		}
+	};
+};
+Flower.prototype.fadeIn = function(time) {
+	if (Number.isFinite(time) && time >= 0) {
+		this.path.addClass('hide');
+		this.path.style.transition = 'opacity ' + time + 'ms';
+		setTimeout(function(path) {
+			path.removeClass('hide');
+		}, 1, this.path);
+	}
+	return this;
+};
+Flower.prototype.fadeOut = function(time) {
+	if (Number.isFinite(time) && time >= 0) {
+		this.path.style.transition = 'opacity ' + time + 'ms';
+		setTimeout(function(path) {
+			path.addClass('hide');
+		}, 1, this.path);
+	}
+	return this;
+};
+Flower.prototype.fadeInOut = function(fadeIn, wait, fadeOut) {
+	if (!Number.isFinite(wait) || wait < 0) wait = 0;
+	if (!Number.isFinite(fadeIn) || fadeIn < 0) fadeIn = 0;
+	if (!Number.isFinite(fadeOut) || fadeOut < 0) fadeOut = 0;
+	this.fadeIn(fadeIn);
+	setTimeout(function(flower, time) {
+		flower.fadeOut(time);
+	}, fadeIn + wait, this, fadeOut);
+	return this;
+};
+Flower.prototype.draw = function() {
+	var path = [],
+		α, β, px, py, i,
+		arcLength = 2 * this.radius * Math.sin(Math.PI * 3 / this.numPetals / 2);
+	for (i=0; i < this.numPetals + 1; i++) {
+		β = 2 * Math.PI / this.numPetals * i - Math.PI / 2
+		α = β + Math.PI / this.numPetals
+		px = Math.cos(α) * arcLength + this.center.x
+		py = Math.sin(α) * arcLength + this.center.y
+		if (!path.length) {
+			path.push('M' + px + ',' + py)
+		} else {
+			path.push('A' + this.petalLength + ',' + this.petalWidth + ',' + Math.rad2deg(β) + ',1,1,' + px + ',' + py)
+		}
+	}
+	this.path.setAttribute('d', path.join('').trim('AL'))
+	document.rootElement.prependChild(this.path)
+//	document.rootElement.appendChild(this.path)
+	return this;
+};
+document.addEventListener("DOMContentLoaded", function() {
+/*
+	var flower = new Flower();
+	flower.radius = 20;
+	flower.petalLength = 20;
+	flower.petalWidth = 18.4;
+	flower.numPetals = 5;
+	flower.setCenter(200, 200);
+	flower.draw();
+	flower.fadeInOut(1000, 0, 1000);
+/*
+	var radius = 100,
+		petalSizeX = 30,
+		petalSizeY = 20,
+		angle = 0,
+		alpha = 0,
+		path = [],
+		svgCircle,
+		i = 0, x, y,
+		cx, cy,
+		px, py,
+		numPetals = 20,
+		svgPath = svg.ele('path'),
+		center = { x: 500, y: 500 },
+		arcLength = 2 * radius * Math.sin(Math.PI * 3 / numPetals / 2);
+	for (i=0; i < numPetals + 1; i++) {
+		// Add Flower Petal Circle
+		angle = 2 * Math.PI / numPetals * i - Math.PI / 2
+
+		cx = Math.cos(angle) * radius + center.x
+		cy = Math.sin(angle) * radius + center.y
+		svgCircle = svg.circle(cx, cy, radius)
+//		document.rootElement.appendChild(svgCircle)
+
+		cx = 2 * Math.cos(angle) * radius + center.x
+		cy = 2 * Math.sin(angle) * radius + center.y
+		svgCircle = svg.circle(cx, cy, petalSizeY)
+//		document.rootElement.appendChild(svgCircle)
+
+		// Find Point Petals Meet
+		alpha = angle + Math.PI / numPetals
+		alpha = 2 * Math.PI / numPetals * i - Math.PI / 2 + Math.PI / numPetals
+		alpha = Math.PI * ( 2 * i / numPetals - 1 / 2 + 1 / numPetals )
+		alpha = Math.PI * ( ( 2 * i + 1 ) / numPetals - 1 / 2 )
+		px = Math.cos(alpha) * arcLength + center.x
+		py = Math.sin(alpha) * arcLength + center.y
+		if (!path.length) {
+			path.push('M' + px + ',' + py)
+		} else {
+			path.push('A' + petalSizeX + ',' + petalSizeY + ',' + Math.rad2deg(angle) + ',1,1,' + px + ',' + py)
+		}
+		svgCircle = svg.circle(px, py, 2)
+		svgCircle.setAttribute('class', 'red')
+		document.rootElement.appendChild(svgCircle)
+	}
+	svgPath.setAttribute('d', path.join('').trim('AL'))
+	document.rootElement.prependChild(svgPath)
+//	document.rootElement.appendChild(svgPath)
+	var rect = svg.ele('rect')
+	rect.setAttribute('x', center.x - radius - petalSizeX)
+	rect.setAttribute('y', center.y - radius - petalSizeX)
+	rect.setAttribute('width', 2 * (radius + petalSizeX))
+	rect.setAttribute('height', 2 * (radius + petalSizeX))
+	document.rootElement.appendChild(rect)
+/**/
+	var start = {
+			angle: 25 * Math.PI / 16,
+			x: 15,
+			y: 15
+		},
+		end = {
+			angle: 0.15 * 2 * Math.PI,
+			x: 500,
+			y: 200
+		},
+		speed = 10,
+		time = 2000,
+		radius = 10,
+		rotations = 20,
+		α = 0,
+		θ = 0,
+		t = 0,
+		path = '',
+		svgPath = svg.ele('path')
+	timeAdvance = function(t) {
+		var cx = start.x + (end.x - start.x) * t / time,
+			cy = start.y + (end.y - start.y) * t / time,
+//			svgCircle = svg.circle(cx, cy, radius)
+//		svgCircle.setAttribute('class', 'spiral')
+//		document.rootElement.appendChild(svgCircle)
+			partialRotate = end.angle / 2 / Math.PI,
+			px = radius * Math.cos( 2 * Math.PI * t / time * ( rotations + partialRotate ) + start.angle ) + cx,
+			py = radius * Math.sin( 2 * Math.PI * t / time * ( rotations + partialRotate ) + start.angle ) + cy
+//			svgPoint = svg.circle(px, py, 1)
+//		svgPoint.setAttribute('class', 'red')
+//		document.rootElement.appendChild(svgPoint)
+		path += (t == 0 ? 'M' : 'L') + px + ',' + py;
+		svgPath.setAttribute('d', path);
+		if (t++ < time) {
+			setTimeout(timeAdvance, 1, t);
+//			timeAdvance(t);
+		}
+	};
+	svgPath.setAttribute('class', 'red')
+	svgPath.setAttribute('d', 'M-100-100');
+	document.rootElement.appendChild(svgPath);
+	setTimeout(timeAdvance, 1, t);
+})
+]]></script>
+	<text x="500" y="50" style="" xml:lang="zh">我爱你</text>
+</svg>
