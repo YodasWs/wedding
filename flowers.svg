@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000" viewBox="0 0 1000 1000" xml:lang="zh">
 <style><![CDATA[
 :root {
@@ -211,7 +211,6 @@ Flower.prototype.draw = function() {
 	return this;
 };
 document.addEventListener("DOMContentLoaded", function() {
-/*
 	var flower = new Flower();
 	flower.radius = 20;
 	flower.petalLength = 20;
@@ -219,7 +218,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	flower.numPetals = 5;
 	flower.setCenter(200, 200);
 	flower.draw();
-	flower.fadeInOut(1000, 0, 1000);
+	flower.fadeIn(1000);
+//	flower.fadeInOut(1000, 10000, 1000);
 /*
 	var radius = 100,
 		petalSizeX = 30,
