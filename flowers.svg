@@ -17,11 +17,22 @@ path {
 path.hide {
 	opacity: 0;
 }
+path.red {
+	stroke-linejoin: round;
+	stroke-linecap: round;
+	stroke-width: 2.5px;
+	stroke: red;
+	fill: none;
+}
 circle {
 }
 circle.red {
 	stroke: red;
 	fill: red;
+}
+circle.spiral {
+	stroke: black;
+	fill: none;
 }
 g > text:first-of-type {
 	font-size: 1.05rem;
@@ -200,14 +211,15 @@ Flower.prototype.draw = function() {
 	return this;
 };
 document.addEventListener("DOMContentLoaded", function() {
+/*
 	var flower = new Flower();
-	flower.radius = 5;
-	flower.petalLength = 5;
-	flower.petalWidth = 4.6;
+	flower.radius = 20;
+	flower.petalLength = 20;
+	flower.petalWidth = 18.4;
 	flower.numPetals = 5;
 	flower.setCenter(200, 200);
 	flower.draw();
-	flower.fadeInOut(500, 0, 1000);
+	flower.fadeInOut(1000, 0, 1000);
 /*
 	var radius = 100,
 		petalSizeX = 30,
@@ -264,17 +276,47 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.rootElement.appendChild(rect)
 /**/
 	var start = {
-			x: 100,
-			y: 100
+			angle: 25 * Math.PI / 16,
+			x: 15,
+			y: 15
 		},
 		end = {
-			x: 200,
+			angle: 0.15 * 2 * Math.PI,
+			x: 500,
 			y: 200
 		},
 		speed = 10,
+		time = 2000,
+		radius = 10,
+		rotations = 20,
 		α = 0,
 		θ = 0,
-		t = 0
+		t = 0,
+		path = '',
+		svgPath = svg.ele('path')
+	timeAdvance = function(t) {
+		var cx = start.x + (end.x - start.x) * t / time,
+			cy = start.y + (end.y - start.y) * t / time,
+//			svgCircle = svg.circle(cx, cy, radius)
+//		svgCircle.setAttribute('class', 'spiral')
+//		document.rootElement.appendChild(svgCircle)
+			partialRotate = end.angle / 2 / Math.PI,
+			px = radius * Math.cos( 2 * Math.PI * t / time * ( rotations + partialRotate ) + start.angle ) + cx,
+			py = radius * Math.sin( 2 * Math.PI * t / time * ( rotations + partialRotate ) + start.angle ) + cy
+//			svgPoint = svg.circle(px, py, 1)
+//		svgPoint.setAttribute('class', 'red')
+//		document.rootElement.appendChild(svgPoint)
+		path += (t == 0 ? 'M' : 'L') + px + ',' + py;
+		svgPath.setAttribute('d', path);
+		if (t++ < time) {
+			setTimeout(timeAdvance, 1, t);
+//			timeAdvance(t);
+		}
+	};
+	svgPath.setAttribute('class', 'red')
+	svgPath.setAttribute('d', 'M-100-100');
+	document.rootElement.appendChild(svgPath);
+	setTimeout(timeAdvance, 1, t);
 })
 ]]></script>
 	<text x="500" y="50" style="" xml:lang="zh">我爱你</text>
