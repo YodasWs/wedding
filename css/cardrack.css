@@ -12,23 +12,13 @@
 	.cardrack > figure {
 		max-width: calc(50% - 2rem - 5px);
 	}
-}
-@media (min-width: 600px) {
-	.cardrack > figure {
-		max-width: calc(33.333% - 2rem - 5px);
+	.cardrack > figure.wide {
+		max-width: calc(75% - 2rem - 5px);
 	}
 }
 @media (min-width: 800px) {
 	.cardrack {
 		max-width: 800px;
 		margin: 0 auto;
-	}
-	.cardrack > figure {
-		max-width: calc(25% - 2rem - 5px);
-	}
-}
-@media (min-width: 800px) and (min-resolution: 150dpi) {
-	.cardrack > figure {
-		max-width: calc(50% - 2rem - 5px);
 	}
 }
