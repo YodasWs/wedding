@@ -89,3 +89,7 @@ div#gaodeMap {
 	height: 400px;
 	width: 600px;
 }
+div#gaodeMap-cover {
+	position: absolute;
+	z-index: 1;
+}
