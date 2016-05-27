@@ -21,7 +21,6 @@ a:visited:active {
 body {
 	background-color: #ffe0ff;
 	background-color: #ffd7d7;
-	min-height: 300vh;
 }
 
 header {
@@ -82,4 +81,15 @@ footer {
 	max-width: 800px;
 	display: flex;
 	justify-content: space-between;
+}
+
+div#gaodeMap {
+	margin: 2rem auto;
+	max-width: 95%;
+	height: 400px;
+	width: 600px;
+}
+div#gaodeMap-cover {
+	position: absolute;
+	z-index: 1;
 }
