@@ -18,6 +18,12 @@ a:visited:active {
 :lang(zh) { display: none; }
 :lang(en-gb) { display: none; }
 
+audio[controls] {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+}
+
 body {
 	background-color: #ffe0ff;
 	background-color: #ffd7d7;
@@ -84,6 +90,7 @@ section > h1 {
 }
 footer {
 	margin: 1rem auto;
+	width: 95%;
 	max-width: 800px;
 	display: flex;
 	justify-content: space-between;
