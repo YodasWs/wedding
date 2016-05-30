@@ -27,7 +27,6 @@ header {
 	text-align: center;
 	position: relative;
 	background-color: inherit;
-	margin-bottom: 4rem;
 }
 header > h1 {
 	font-size: 2rem;
@@ -48,6 +47,13 @@ header > nav {
 header > nav > h1 {
 	display: none;
 }
+
+header + img {
+	display: block;
+	margin: 0 auto 4rem;
+	max-width: 95%;
+}
+
 section {
 	margin: 1rem auto;
 }
