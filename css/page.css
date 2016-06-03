@@ -54,10 +54,32 @@ header > nav > h1 {
 	display: none;
 }
 
-header + img {
-	display: block;
+header + div {
+	background-color: white;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
 	margin: 0 auto 4rem;
-	max-width: 95%;
+	align-items: center;
+	font-size: 1in;
+	color: pink;
+	transition: font-size 300ms;
+}
+header + div > img {
+	height: 200px;
+	display: block;
+	max-width: 40%;
+	margin: 1rem 2%;
+	transition: all 300ms;
+}
+@media (max-width: 500px) {
+	header + div {
+		font-size: 0.7in;
+	}
+	header + div > img {
+		height: 150px;
+		margin: 1.5rem 5%;
+	}
 }
 
 section {
