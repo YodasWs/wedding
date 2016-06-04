@@ -54,31 +54,39 @@ header > nav > h1 {
 	display: none;
 }
 
-header + div {
+div.banner {
+	transition: font-size 300ms;
 	background-color: white;
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: center;
-	margin: 0 auto 4rem;
 	align-items: center;
-	font-size: 1in;
+	margin: 0 auto 4rem;
+	font-weight: 900;
+	font-size: 1.5in;
 	color: pink;
-	transition: font-size 300ms;
 }
-header + div > img {
+div.banner > img {
 	height: 200px;
 	display: block;
-	max-width: 40%;
 	margin: 1rem 2%;
 	transition: all 300ms;
 }
+div.banner > img[src$="heart.png"] {
+	height: 150px;
+	height: calc(2 * 200px / 3);
+}
 @media (max-width: 500px) {
-	header + div {
-		font-size: 0.7in;
+	div.banner {
+		font-size: 1in;
 	}
-	header + div > img {
+	div.banner > img {
 		height: 150px;
-		margin: 1.5rem 5%;
+		margin: 1.5rem 2%;
+	}
+	div.banner > img[src$="heart.png"] {
+		height: 100px;
+		height: calc(2 * 150px / 3);
 	}
 }
 
