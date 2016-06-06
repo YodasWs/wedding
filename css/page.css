@@ -57,7 +57,7 @@ header > nav > h1 {
 
 div.banner {
 	transition: font-size 300ms;
-	background-color: white;
+	background-color: floralwhite;
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: center;
